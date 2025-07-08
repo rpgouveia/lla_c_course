@@ -1,0 +1,39 @@
+## Class 1 - What is a Variable? ##
+# Introduction #
+A variable is a named location in memory used to store data while a program runs. 
+Variables allow programs to remember values, perform calculations, and make decisions based on input or stored data.
+
+# Why Do I Need Variables? #
+In C, a variable must be declared before it can be used. 
+A declaration specifies the variable's type (what kind of data it will hold), its name, and optionally its initial value.
+
+type name = initial_value;
+
+Example:
+int personID = 1;
+
+int is the type (an integer).
+personID is the name of the variable.
+1 is the initial value stored in that variable.
+
+# Best Practices for Naming Variables #
+Use meaningful names that describe what the variable represents. 
+This helps you and others understand the code later. 
+Avoid meaningless names like x or temp unless they are used in a very short and specific context.
+
+Good:
+float employeeHoursWorked;
+
+Bad:
+float x;
+
+** Summary ** 
+Variables are essential in any program. 
+In C, you declare variables by specifying a type, name, and optionally an initial value. 
+Understanding how to use and name them correctly is one of the first steps in writing clean, functional C code.
+
+** Resources **
+https://www.geeksforgeeks.org/c/variables-in-c/
+https://www.programiz.com/c-programming/c-variables-constants
+
+

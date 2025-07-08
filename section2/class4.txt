@@ -1,0 +1,70 @@
+Arrays in C
+Introduction
+In the variables section, we learned about how to create variables. 
+But let’s say you wanted to store several numbers in your program—maybe a list of employee IDs. 
+You might be tempted to do something like this:
+
+int id1 = 1;
+int id2 = 2;
+int id3 = 3;
+
+where id1 is the ID of employee 1, id2 is the ID of employee 2, etc.
+
+This works for a few values, but what if you had 100 or 1,000 IDs to store? This approach becomes messy and impossible to maintain.
+
+There’s a better solution: arrays.
+
+What Is an Array?
+An array is a way to store a collection of values of the same type in a single, continuous block of memory. 
+Instead of declaring many individual variables, you can group them together under one name.
+
+Arrays:
+- Keep your code cleaner
+- Make it easier to loop through multiple values
+- Use memory more efficiently
+
+Declaring an Array
+To declare an array, you specify the type of the elements, the name of the array, and the number of elements you want to store.
+
+int employeeIDs[5];
+
+This creates space in memory for 5 integers, all grouped together.
+
+Setting Values in an Array
+You can assign values to each element using square brackets:
+
+employeeIDs[0] = 101; // First element
+employeeIDs[1] = 102; // Second element
+employeeIDs[2] = 103;
+employeeIDs[3] = 104;
+employeeIDs[4] = 105; // Fifth and final element
+
+Important: Arrays in C are zero-indexed — the first element is at position 0.
+
+Reading Values from an Array
+You can read from the array the same way:
+
+printf("ID at index 2: %d\n", employeeIDs[2]); // Outputs: 103
+
+Initializing an Array
+You can also initialize an array when you declare it:
+
+int employeeIDs[5] = {101, 102, 103, 104, 105};
+
+Why Arrays Matter in This Course
+As you build the Employee Database project later in this course, you’ll use an array to store your list of employees. 
+Instead of a bunch of separate variables, you’ll create an array of struct types — where each struct represents one employee.
+
+Arrays let us organize and access that list in a structured, efficient way.
+
+** Summary **
+Arrays:
+- Store multiple values of the same type
+- Make your code cleaner and easier to work with
+- Are essential for any real program that handles more than a couple values
+
+You’ll use arrays constantly in C. Mastering them now will make your life easier throughout this course.
+
+** Resources ** 
+C Arrays - Programiz
+GeeksforGeeks: Arrays in C

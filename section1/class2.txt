@@ -1,0 +1,55 @@
+## Class 2 - Variable Scope Rules ##
+# What is scope? #
+When we declare variables in programming, those variables are only around for a certain period of time. 
+They are stored in RAM, and as a result do not exist forever. 
+The "scope" of a variable determines how long it lives, and more importantly as a programmer, where that variable can be accessed from.
+
+Scope is a region in a program that is able to access a particular variable or set of variables in memory.
+
+# Why do I need to know about scope? #
+Variable scope in C affects what parts of the code can access our variables, and will eventually inform how we structure our program.
+
+# How does variable scope work in C? #
+In C, there are two primary types of scope. Local and Global scope.
+
+# Local Scope (Function Scope) #
+Local Scope is defined by the region inside of the parenthesis of a function, and defines where the program can access variables. 
+For example, here we define a variable called personID. 
+Because personID is declared within main, personID can later be modified in that function. The variable is "in scope."
+
+int main()
+{
+    int personID = 0;
+    personID += 1;
+}
+
+If we were to try and access the function personID outside of main, the program would throw an error.
+
+With a functions local scope, we can also create regions of sub-scope where we can create additional variables that cannot be affected 
+by the outside scope.
+
+int main()
+{
+    int personID = 0;
+    personID += 1;
+    {
+        // this will not affect the other personID
+        int personID = 0;
+    }
+}
+
+# Global Scope #
+When a variable is declared outside of the confines of a function, all regions of code can touch that variable. 
+Because everyone can access it, that variable is in global scope.
+
+int g_NumPersons = 0;
+
+int main()
+{
+    int personID = 0;
+    personID += 1;
+}
+
+Here, g_NumPersons is in global scope. 
+This is generally accepted as bad practice, because tracking the logic used in this variable against all lines of code is hard to do, 
+and can lead to logic errors.

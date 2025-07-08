@@ -1,0 +1,85 @@
+## Introduction to the Preprocessor ##
+
+# What is the Preprocessor? #
+The preprocessor is the first stage in the process of converting C code into executable machine code. 
+It prepares your code for compilation by handling directives that begin with the # symbol. 
+These are not C code themselves but instructions to the preprocessor.
+
+The preprocessor is a way to create snippets of code using macros or files that can be easily repeated using simple preprocessor notation.
+
+# Why is Preprocessing Needed? #
+Before the compiler can understand and translate your code into machine instructions, it needs a fully assembled and context-aware view 
+of the source code. This is where preprocessing comes in. It:
+
+* Expands macros
+* Includes external files (like standard libraries or headers)
+* Enables conditional compilation
+* Removes comments
+Without this step, the compiler would be unable to resolve things like #include <stdio.h>, macro definitions, or conditional logic 
+based on #ifdef.
+
+# The Full Compilation Process # 
+When you compile a C program, the following stages occur:
+
+Preprocessing – handles all # directives.
+Compilation – translates the code into assembly.
+Assembly – converts assembly to machine code (object files).
+Linking – connects all object files and libraries into a final executable.
+Common Preprocessor Directives
+Here are some of the most common preprocessor directives and what they do:
+
+#define – Defines a macro.
+#define PI 3.14
+
+This is useful for constants that you want to control at compile time. This also can be used to enable or disable certain features, 
+like #define DEBUG.
+
+#undef – Undefines a previously defined macro.
+
+#undef PI
+
+#include – Includes the contents of a file.
+
+#include <stdio.h>
+#include "myheader.h"
+
+#if, #elif, #else, #endif – Used for conditional compilation.
+
+#if DEBUG
+printf("Debug mode\n");
+#endif
+
+#ifdef, #ifndef – Check if a macro is defined or not.
+
+#ifdef DEBUG
+#define LOG(x) printf(x)
+#else
+#define LOG(x)
+#endif
+
+#error – Produces a compile-time error.
+
+#error "Unsupported platform"
+
+#pragma – Provides compiler-specific instructions.
+
+#pragma once
+
+#line – Changes the compiler’s idea of the line number and filename.
+
+#line 100 "custom_file.c"
+
+#warning – Produces a compiler warning (GCC specific).
+
+#warning "This is a warning"
+
+** Summary **
+The preprocessor is essential in the build pipeline. It resolves includes, expands macros, and controls what code is compiled 
+under certain conditions. Understanding this phase helps you write more portable, maintainable, and configurable C code.
+
+** Resources **
+GNU CPP Manual
+C Preprocessor Reference (cplusplus.com)
+
+
+
