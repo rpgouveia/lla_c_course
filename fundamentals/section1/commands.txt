@@ -1,2 +1,2 @@
 To compile:
-gcc -o filename file.c
+gcc -o filename.out file.c

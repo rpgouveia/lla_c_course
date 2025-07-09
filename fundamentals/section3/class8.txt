@@ -1,0 +1,85 @@
+As a developer, it pays to be lazy. Here's what I mean. 
+If you find yourself typing code that performs the same action over and over again, don't do that. 
+Instead, organize the code into a block that can be reused in other places in your code, and then ONLY use that block. 
+This is called the DRY principle, meaning dont repeat yourself. 
+How do we do that in C? Functions.
+
+# Functions #
+Functions in C are a block of code that is seperated from the rest of the code and performs one logical task. 
+The function you've seen so far is the main function, which is expected by your compiler and is ran when your program starts.
+
+1. Making our own functions
+When we've found a logical piece of code that can be extracted and seperated into its own block of code to be re-used, we turn 
+that code into a function. To do that, we use the following syntax.
+
+//return_type name (parameter list) {..code..}
+int add(int x, int y) {
+    int z = x+y;
+    return z;
+}
+...
+int main() {
+    int ans = add(1,2);
+    printf("%d\n", ans);
+    
+    return 0;
+}
+
+2. Return
+You see that I've used the return keyword a few times above. What does return do? 
+When a function is ran, at some point we want the function to go back to where the function was called and
+continue the original function. 
+
+Doing this is called "returning".
+To get a value put into a variable as a result of the function, some functions (most functions) return a "value". 
+Above, for example, add returns an integer and is stored in the variable ans in the main function.
+
+3. Naming and Style
+It is expected that a function will perform one logical thing. 
+For our Database Project, we will create a whole slew of functions that do one simple thing. 
+The name should clearly describe what the function does. 
+If you find your function doing multiple logical things, you should either change the logic or the name of the function. 
+Good functions look like...
+
+int initialize_database(database_t *d) {
+    ...
+}
+
+int destroy_database(database_t *d) {
+    ...
+}
+
+4. Return Patterns
+There are two patterns programmers tend to follow in C when designing functions. The first is a "return the result" pattern
+
+5. Return the Result
+Returning the result will return the result of an operation. 
+This sounds simple, but runs into a problem when the operation encounters an error. 
+With RTR, the return value is treated as the result and as the error, which is difficult to do correctly. 
+Consider the following...
+
+int add_to_age(int age, int difference) {
+  // you cant age backwards
+  if (difference < 0) {
+    return -1;
+  }
+
+  return age + difference;
+}
+
+In this example, the user is required to know that -1 the error value. 
+Failure to follow this convention could cause bad behavior. 
+Thus, programmers sometimes choose to use return the status (RTS).
+
+status_t add_to_age(int *age, int difference) {
+  // you cant age backwards
+  if (difference < 0) {
+    return STATUS_ERROR;
+  }
+
+  *age = *age + difference;
+  return STATUS_OKAY;
+}
+
+In this scenario, the value returned is an error, and the changes happen through pointers to a variable. 
+Pointers will be discussed in a future lesson.

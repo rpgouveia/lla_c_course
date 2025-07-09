@@ -3,7 +3,7 @@ A string is a structure in C that actually gets people in trouble a LOT.
 Tons of security vulnerabilities in modern software are caused by buffer overflows, and most of those buffer overflows have to do 
 with strings. So what is a string?
 
-# What is a string? #
+1. What is a string?
 A string is just an array of characters. An array is just a block of memory that contains a set of variables that are the same type. 
 So what if those variables are characters? Welp now you have a string.
 
@@ -14,15 +14,15 @@ printf("%s\n", my_str);
 
 That up there is a STRING. How crazy is that! And you can print it and it will show you the string.
 
-# Strings are special #
+2. Strings are special
 A string in C has a very special characteristic that makes it amazing, but also dangerous. All strings in C are ended with a null byte. 
 If they don't end in a null byte, the operation you'll performing will complete going.
 
-### Why does that matter? ### 
+3. Why does that matter?
 If you run operations like strcpy, which copies data from the src buffer to the dest buffer. 
 It will ONLY STOP COPYING OR PRINTING IF IT ENCOUNTERS THAT ZERO BYTE.
 So, the code above actually has a pretty MAJOR SECURITY VULNERABILITY! 
->> You have to make sure your strings end with a zero, otherwise things will go sideways. <<
+>>> You have to make sure your strings end with a zero, otherwise things will go sideways. <<<
 
 char my_str[] = {'h', 'e', 'l', 'l', 'o', 0};
 printf("%s\n", my_str);

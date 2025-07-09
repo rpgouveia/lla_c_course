@@ -1,0 +1,50 @@
+## Conditional Statements ##
+In C, if we want our code to take a certain path based on the state of the program, we have to create what is called a conditional
+statement. A conditional statement is a piece of code that can take one of two paths based on some sort of logic.
+
+One type of conditional statement is what is referred to as an "if statement"
+
+# 1. If Statement #
+An if statement says, "only do this thing if the following condition is true", for example:
+
+int x = 0;
+// get value from the user
+scanf("%d", &x);
+if (x == 42) {
+    printf("You said 42!\n");
+}
+
+In the above code, we created a conditional statement that will only run if the value from the user is 42. 
+This may seem simple, but we can use that statement to run almost the entirety of the code that we need to make for our employee database 
+project.
+
+Computers run on binary, which is a 1 or 0, effectively it can only take action if things are true or not true. 
+An if statement does just that: it runs some statement and if the result is true, it takes an action
+
+# 2. Else statement #
+We can add some more code to the above code to make it take an additional action. 
+Like, else. The else clause says "do this other thing if the condition is false", for example:
+
+int x = 0;
+// ..get value from the user..
+if (x == 42) {
+    printf("You said 42!\n");
+} else {
+    printf("You said something else!\n");
+}
+
+# 3. Else If statement #
+There is one more conditional logic that we can use with if statements. 
+We can chain multiple if-statements together that are mutual in their logic, by using an if-else tree. 
+The if-else tree will check each logical condition in order, and execute the first one that is true. 
+After that, it will stop checking the tree, for example:
+
+int x = 0;
+// ..get value from the user..
+if (x == 42) {
+    printf("You said 42!\n");
+} else if (x == 24) { 
+    printf("You said 24!\n");
+} else {
+    printf("You said something else!\n");
+}
