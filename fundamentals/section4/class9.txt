@@ -1,0 +1,86 @@
+In our previous lessons, we talked about how to organize data that was the same type together into a continguous block of memory.
+This was called an array and gave us the power to store and modify a lot of data at the same time programatically.
+
+There's a problem. 
+To create an employee, we want to use a block of memory that contains different types of fields, like maybe one for a name and another
+for an income. This is where a structure comes in.
+
+# Structure #
+A structure is a block of memory that contains variables of different or same types that represents a logical representation of memory.
+
+You can create a structure with the following syntax.
+
+struct mystruct {
+    int i;
+    char c;
+};
+
+This will create a type called struct mystruct that we can use later on in the code. This structure has two members i and c.
+
+1. Many Structures
+Before, we created arrays. 
+If a structure is a type, can we create multiple structures together in an array? 
+An array of structures? Yes.
+
+struct mystruct {
+    int i;
+    char c;
+};
+
+int main() {
+    struct mystruct mystructs[10];
+    ...
+}
+
+2. Initializing a Structure
+When creating a structure, you need to give it life in the form of values. 
+You have a few options.
+
+3. Not initializing it
+Don't do this.
+
+struct mystruct {
+    int i;
+    char c;
+};
+
+int main() {
+    struct mystruct;
+}
+
+The problem with this is the mystruct values will be determined by whatever values used to be in the slots of memory prior to its existence. 
+Basically, you can't determine what will be there and it's therefore bad practice.
+
+4. Initialize to Zero
+This is safer.
+
+struct mystruct {
+    int i;
+    char c;
+};
+
+int main() {
+    struct mystruct = {0};
+}
+
+This will set all the fields in the struct to zero.
+
+5. Initialize the fields.
+This is best.
+
+struct mystruct {
+    int i;
+    char c;
+};
+
+int main() {
+    struct mystruct = {
+        .i = 4,
+        .c = 'A',
+    };
+}
+
+This will set all the fields in the struct. This is the best if you know the values beforehand.
+
+Next
+Move on to the next logical way to organize memory, unions. We'll see you there.

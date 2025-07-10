@@ -1,0 +1,52 @@
+# Union #
+Unions are a field that assign multiple labels of multiple types to the same memory location.
+
+You can create a structure with the following syntax.
+
+union myunion {
+    int i;
+    char c;
+};
+
+This will create a type called union myunion that we can use later on in the code. 
+This structure has two members i and c, but both of them will contain data at the same location. 
+The union is only the size of the largest element, in this case int i, or 4 bytes.
+
+1. Unions in Practice
+union myunion {
+    int i;
+    char c;
+};
+
+int main() {
+    union myunion u;
+    u.i = 0x41424344;
+    printf("%c"\n, u.c); 
+    ...
+}
+
+2. Best Practice
+Typically, when using a union, it's best to create a structure that wraps the union to determine what mode the data is being used in.
+
+union myunion {
+    int i;
+    char c;
+};
+
+struct mycontainer {
+    mode_t mode;
+    union myunion u;
+}
+
+int main() {
+    struct mycontainer c = {
+      .mode = MODE_CHAR,
+      .u.c = 'C',
+    };
+    ...
+}
+
+In the above example, the mode variable can be used to tell the program what action to take regarding a union.
+
+Next
+Move on to the next lesson where we talk about how to make structures more maintainable across various systems.

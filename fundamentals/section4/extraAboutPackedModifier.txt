@@ -1,0 +1,24 @@
+O que é Struct Packing?
+Por padrão, o compilador C adiciona "padding" (preenchimento) entre os membros de uma struct para otimizar o acesso à memória,
+alinhando os dados conforme a arquitetura do processador.
+
+Por que é importante em sistemas embarcados?
+1. Protocolos de comunicação: Quando você envia dados via UART, SPI, I2C ou rede, precisa controlar exatamente como os bytes são organizados.
+2. Mapeamento de hardware: Registradores de microcontroladores têm layouts específicos que devem ser respeitados.
+3. Economia de memória: Em MCUs com pouca RAM, cada byte conta.
+
+Principais diferenças:
+Struct normal: O compilador adiciona padding para alinhamento (geralmente 12 bytes no exemplo)
+Struct packed: Sem padding, dados consecutivos (8 bytes no exemplo)
+
+Considerações importantes:
+Performance: Acessos não-alinhados podem ser mais lentos em algumas arquiteturas (ARM Cortex-M pode lidar bem, mas outros processadores podem ter penalidades).
+Portabilidade: Sempre teste no hardware real, pois o comportamento pode variar.
+Endianness: Em comunicação entre sistemas diferentes, considere usar funções como htons() e ntohs() para conversão de byte order.
+
+Dica prática:
+Para protocolos sérios, use verificações adicionais:
+
+static_assert(sizeof(struct protocol_header) == 10, "Header size mismatch!");
+
+O packed é uma ferramenta poderosa em sistemas embarcados, especialmente quando você precisa de controle total sobre o layout de memória!

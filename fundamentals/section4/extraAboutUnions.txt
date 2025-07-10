@@ -1,0 +1,116 @@
+O que é uma Union?
+Uma union é semelhante a uma struct, mas com uma diferença fundamental: 
+todos os membros compartilham o mesmo espaço de memória. 
+Isso significa que apenas um membro pode conter um valor válido por vez.
+
+Principais características:
+-Economia de memória: Ocupa apenas o espaço do maior membro
+-Sobreposição de dados: Alterar um membro afeta os outros
+-Interpretação múltipla: Permite ver os mesmos dados de formas diferentes
+
+Vantagens das Unions em Sistemas Embarcados:
+1. Economia de Memória
+Em microcontroladores com RAM limitada, unions economizam espaço significativo
+Especialmente útil quando você precisa armazenar diferentes tipos de dados, mas não simultaneamente
+
+2. Manipulação de Hardware
+Perfeitas para acessar registradores de diferentes formas (8, 16, 32 bits)
+Facilitam a configuração de periféricos e flags de status
+
+3. Protocolos de Comunicação
+Ideais para montar/desmontar pacotes de dados
+Permitem acesso tanto aos campos individuais quanto ao buffer bruto
+
+4. Conversões de Tipo
+Úteis para converter entre representações (float ↔ bytes)
+Importantes para transmissão de dados pela rede ou armazenamento
+
+Cuidados Importantes!
+Endianness: A ordem dos bytes pode variar entre arquiteturas
+Alinhamento: O compilador pode adicionar padding
+Inicialização: Sempre inicialize completamente a union
+Portabilidade: Comportamento pode variar entre compiladores
+
+Comparação Union vs Struct:
+// STRUCT - cada membro tem seu espaço (12 bytes total)
+struct exemplo_struct {
+    int a;     // 4 bytes
+    float b;   // 4 bytes  
+    char c;    // 1 byte + 3 de padding
+};
+
+// UNION - todos compartilham espaço (4 bytes total)
+union exemplo_union {
+    int a;     // 4 bytes
+    float b;   // 4 bytes
+    char c;    // 1 byte
+};
+
+Todos os atributos da Union ocupam EXATAMENTE o mesmo endereço de memória!
+Imagine a memória como gavetas numeradas. Em uma struct, cada membro tem sua própria gaveta:
+STRUCT:
+Gaveta 1000: int a
+Gaveta 1004: float b  
+Gaveta 1008: char c
+
+Já em uma union, todos os membros usam a mesma gaveta:
+UNION:
+Gaveta 1000: int a     ← Todos apontam para o mesmo lugar!
+Gaveta 1000: float b   ← 
+Gaveta 1000: char c    ←
+
+Visualização da Memória
+Imagine que você tem 4 bytes consecutivos na memória:
+Endereço: 1000  1001  1002  1003
+Conteúdo: [  ]  [  ]  [  ]  [  ]
+
+Em uma STRUCT:
+struct exemplo {
+    int a;     // 4 bytes
+    char b;    // 1 byte
+};
+
+Na memória ficaria assim:
+Endereço: 1000  1001  1002  1003  1004
+         [--- int a (4 bytes) ---] [char b]
+
+Agora em uma UNION:
+union exemplo {
+    int a;     // 4 bytes
+    char b;    // 1 byte
+};
+Na memória ficaria assim:
+Endereço: 1000  1001  1002  1003
+         [--- int a (4 bytes) ---]
+         [char b] (usa só o primeiro byte)
+
+O que acontece na prática:
+Quando você escreve u.a = 1000:
+
+Os 4 bytes são preenchidos com o valor 1000
+u.b automaticamente "vê" o primeiro byte desse valor
+
+Quando você escreve u.b = 'A':
+Apenas o primeiro byte é alterado para 65 (código ASCII de 'A')
+u.a agora tem um valor "estranho" porque seu primeiro byte mudou
+
+
+Exemplo Prático Simples:
+union simples {
+    int numero;      // 4 bytes
+    char letra;      // 1 byte (usa o primeiro byte do int)
+};
+
+union simples u;
+u.numero = 0;        // [00] [00] [00] [00]
+u.letra = 'A';       // [41] [00] [00] [00]  (41 = 'A' em hex)
+// Agora u.numero = 65 (porque 0x41 = 65 em decimal)
+
+
+Por que isso é útil em sistemas embarcados?
+
+Registradores de hardware: Você pode acessar um registrador de 32 bits como um valor completo OU como 4 bytes individuais
+Protocolos de comunicação: Montar pacotes byte por byte OU acessar campos estruturados
+Economia de memória: Em vez de ter múltiplas variáveis, você usa apenas o espaço necessário
+
+A union é uma "janela" que permite ver os mesmos dados de formas diferentes!
