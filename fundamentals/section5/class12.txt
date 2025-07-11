@@ -1,0 +1,81 @@
+Memory in C
+
+Introduction
+Memory management is a critical aspect of C programming, giving developers direct control over how and where data is stored and accessed.
+
+In computer programming, we need to temporarily store information about our program. 
+This is where variables come in. When we learned about variables, we learned that they are named placeholder for information.
+
+It's important to understand, especially in a low level language like C, that variables have two properties:
+- an address;
+- a value.
+
+The address of the variable is its location in memory. 
+Literally think of it like the street address of the variable. 
+When you make a variable, you don't set the address of the variable. 
+The address is determined by the location in memory where the variable is placed. 
+Consider this example.
+
+int x = 4;
+
+Above, we make a variable named x, who's value is set to four. 
+But, under the hood, the variable also receives an address because it is put on the stack. 
+The address of the variable x is an address in the range of stack memory.
+
+Concept
+Going deeper into memory, there are two TYPES of addresses, a "physical" memory address and a "virtual" memory address.
+
+Physical vs Virtual Memory Addresses
+a Physical Memory Address: Refers to the actual location in the computer's RAM hardware. 
+These addresses are managed by the hardware and the operating system.
+
+a Virtual Memory Address: A logical address used by programs. 
+The operating system's memory manager maps these virtual addresses to physical addresses. 
+This mapping allows programs to use more memory than physically available and provides process isolation.
+
+64-bit Linux Process Memory Map
+In a 64-bit Linux environment, a process memory map typically includes:
+-Text Segment: Contains executable code.
+-Initialized Data Segment: Stores global and static variables initialized by the programmer.
+-Uninitialized Data Segment (BSS): Holds uninitialized global and static variables.
+-Heap: Dynamically allocated memory managed by malloc(), realloc(), and free().
+-Stack: Memory for function call frames, including local variables and return addresses.
+-Memory-mapped Regions: Used for shared libraries and files mapped into memory.
+
+A simplified map looks like:
+|-----------------------------|
+| Stack (grows downward)      |
+|-----------------------------|
+| Memory-mapped segments      |
+|-----------------------------|
+| Heap (grows upward)         |
+|-----------------------------|
+| Uninitialized Data (BSS)    |
+|-----------------------------|
+| Initialized Data            |
+|-----------------------------|
+| Text Segment (code)         |
+|-----------------------------|
+
+Memory Management in C
+Stack Memory: Automatically allocated and deallocated for local variables and function calls.
+Heap Memory: Dynamically allocated using functions like malloc() and free().
+Example Code
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr = (int *)malloc(sizeof(int));
+    if (ptr == NULL) {
+        printf("Memory allocation failed\\n");
+        return 1;
+    }
+    *ptr = 42;
+    printf("Value: %d, Address: %p\\n", *ptr, (void*)ptr);
+    free(ptr);
+    return 0;
+}
+
+Resources
+Understanding Virtual Memory >> https://en.wikipedia.org/wiki/Virtual_memory
+C Pointers and Memory Management >> https://www.cprogramming.com/tutorial/c/lesson6.html
