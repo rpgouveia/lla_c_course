@@ -1,0 +1,17 @@
+=====================================================
+MODO DE USO
+=====================================================
+gcc -o myProgram.out myProgram.c -g
+
+=====================================================
+TODOS OS TIPOS DE ERROS QUE O VALGRIND DETECTA
+=====================================================
+
+COMANDO COMPLETO:
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./programa
+
+FLAGS ÚTEIS:
+--leak-check=full        → Mostra todos os vazamentos
+--show-leak-kinds=all    → Mostra todos os tipos de vazamento
+--track-origins=yes      → Rastreia origem de valores não inicializados
+--show-reachable=yes     → Mostra memória ainda acessível
