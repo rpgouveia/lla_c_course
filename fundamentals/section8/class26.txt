@@ -1,0 +1,39 @@
+### Type Casting ###
+To type cast a variable, you do the following expression.
+
+int other_var = -1;
+unsigned int x = (unsigned int)other_var;
+
+Seems easy enough, right? Well, yes. Most of the time. 
+However, typecasting variables of different types has effects on the variables that is important to understand.
+
+### Signedness Casting ###
+int other_var = -1;
+unsigned int x = (unsigned int)other_var;
+
+In this example, we cast a negative value to an unsigned value. 
+It's important to understand under the hood how signedness will effect the value of this variable in an unsigned fashion. 
+For example, -1 becomes MAX_INT in the following value.
+
+### Up Casting ###
+short other_var = -1;
+int x = (unsigned int)other_var;
+
+When you cast up a variable from one size to a larger size, the signedness comes with it. 
+For example, here, despite shorts being 16 bits and integers being 32 bits, the value -1 will be sign extended through the larger variable.
+
+### Down Casting ###
+int x = 0xfffffefe;
+short other_var = (short)int;
+
+When you cast a larger variable to a smaller variable, the number will be truncated because you cannot fit the entire size of the larger 
+variable into the smaller variable.
+
+### Floats ###
+float f = 3.14;
+int wasafloat = (int)f;
+
+Floats or doubles can be cast to other variable types. 
+It's important to understand that under the hood, assembly instructions are generated in the FPU of the processor to execute this conversion. 
+In other casts, the data has not been significantly manipulated to enable the cast. 
+In this case, the IEEE704 type must be manipulated to reveal the scalar value.

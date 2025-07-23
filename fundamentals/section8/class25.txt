@@ -1,0 +1,72 @@
+### Types ###
+Here are the common types, their bit length, their signedness, and the associated size.
+
+C Data Type: char
+Signed/Unsigned: Signed
+Bit Length: 8 bits
+Minimum Value: -128
+Maximum Value: 127
+
+C Data Type: unsigned char
+Signed/Unsigned: Unsigned
+Bit Length: 8 bits
+Minimum Value: 0
+Maximum Value: 255
+
+C Data Type: short
+Signed/Unsigned: Signed
+Bit Length: 16 bits
+Minimum Value: -32,768
+Maximum Value: 32,767
+
+C Data Type: unsigned short
+Signed/Unsigned: Unsigned
+Bit Length: 16 bits
+Minimum Value: 0
+Maximum Value: 65,535
+
+C Data Type: int
+Signed/Unsigned: Signed
+Bit Length: 16 or 32 bits
+Minimum Value: -2,147,483,648 (32-bit)
+Maximum Value: 2,147,483,647 (32-bit)
+
+C Data Type: unsigned int
+Signed/Unsigned: Unsigned
+Bit Length: 16 or 32 bits
+Minimum Value: 0
+Maximum Value: 4,294,967,295 (32-bit)
+
+C Data Type: long
+Signed/Unsigned: Signed
+Bit Length: 32 bits
+Minimum Value: -2,147,483,648
+Maximum Value: 2,147,483,647
+
+C Data Type: unsigned long
+Signed/Unsigned: Unsigned
+Bit Length: 32 bits
+Minimum Value: 0
+Maximum Value: 4,294,967,295
+
+C Data Type: long long
+Signed/Unsigned: Signed
+Bit Length: 64 bits
+Minimum Value: -9,223,372,036,854,775,808
+Maximum Value: 9,223,372,036,854,775,807
+
+C Data Type: unsigned long long
+Signed/Unsigned: Unsigned
+Bit Length: 64 bits
+Minimum Value: 0
+Maximum Value: 18,446,744,073,709,551,615
+
+C Data Type: float
+Bit Length: 32 bits
+Minimum Value: ~ -3.4 x 10^38
+Maximum Value: ~ 3.4 x 10^38
+
+C Data Type: double
+Bit Length: 64 bits
+Minimum Value: ~ -1.7 x 10^308
+Maximum Value: ~ 1.7 x 10^308
