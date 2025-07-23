@@ -1,0 +1,31 @@
+### Reading File Metadata ###
+In our previous section we learned about how to read from a file. 
+Now, this is all well and good, but the minute we start taking input from the user, we need to start being protective of our code. 
+From a defense standpoint, all input from the user should be assumed to be malicious and malformed until proven otherwise.
+
+Today we'll use the stat command to check and confirm that the data reported by the user is correct.
+
+### stat ###
+stat is a linux system call that asks the kernel to report information about a specific file. 
+To learn more about the specific details of stat, try man stat.
+
+stat ./my-db.db
+
+### Validating User Input ###
+We can use the stat family of functions, specifically fstat to check what the kernel has to say about the file, and then confirm that 
+the metadata reported in the file head is the same.
+
+...
+struct stat dbstat = {0};
+if (fstat(fd, &stat) < 0) {
+    perror("fstat");
+    close(fd);
+    return -1;
+}
+...
+if (stat.st_size != head.size) {
+    printf("HACKER DETECTED!\n");
+    close(fd);
+    return -1;
+}
+

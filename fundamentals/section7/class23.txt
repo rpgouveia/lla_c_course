@@ -1,0 +1,46 @@
+### File Input ###
+To read from a file, just like before we need to first open the file. 
+We do this using the open libc function to get a file descriptor to that file.
+
+### Create Your Fake Database ###
+For this lesson, create a fake database header with.
+
+echo -ne "\x01\x00\xff\x00\x08\x00\x00\x00" > ./my-db.db
+
+This database header structure is defined in C as...
+
+struct database_header {
+    unsigned short version;
+    unsigned short employees;
+    unsigned int filelength;
+};
+
+### open ###
+Again, make sure you're reading your man pages before you use functions
+
+man open
+
+Here, I don't want to create the file, I only want to open it. 
+And, I only want read permissions.
+
+...
+int fd = open("./my-db.db", O_RDONLY);
+if (fd == -1) {
+    perror("open");
+    return -1;
+}
+...
+
+### read ###
+With the file open and the descriptor checked to be a valid value, we can use that descriptor in other functions. 
+For example, read. Here, we can use read to read the contents of that file into our database header. 
+This is really cool, because instead of reading in some data and then converting the data, we can write it directly 
+into our header structure and check the data
+
+struct database_header head = {0};
+...
+read(fd, &head, sizeof(head));
+printf("Database Version %d", head.version);
+
+The above function uses the descriptor from before, and reads the data into our structure. 
+We can use that structure for future functionality in the database, like looping over the file to read employees.

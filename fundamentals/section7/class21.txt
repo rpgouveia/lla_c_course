@@ -1,0 +1,18 @@
+### Introduction to File Descriptors ###
+
+In this section, we're going to start using files. Here's how this works.
+
+File Descriptors
+Eventually, when we ask the kernel for a file to be opened through a system call in a library, the kernel will just return a number to us. ...why? 
+Didn't we ask for a file?
+
+Yes.
+
+A file descriptor is a number used by the kernel to track (describe) what file specifically you're talking about when you do file operations
+
+You've already seen this
+In Linux, every program you run has three file descriptors open by default
+
+0: stdin - a file that represents the input to your program from the command line
+1: stdout - a file that represents the output of your program to the command line
+2: stderr - a file that represents the output of your program, but containing only errors

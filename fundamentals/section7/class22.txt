@@ -1,0 +1,36 @@
+### File Output ###
+To write to a file, we need to first open the file. We do this using the open libc function to get a file descriptor to that file. 
+We'll use that file descriptor in later functions to describe to the kernel what file we want to perform that action on.
+
+### open ###
+Again, make sure you're reading your man pages before you use functions
+
+man open
+
+To open a file, we specify the path that we want to open, as well as the type of open operation that we want to do. 
+All of the types are described in the man page.
+
+...
+int fd = open("./a-file", O_RDWR | O_CREAT, 0644);
+if (fd == -1) {
+    perror("open");
+    return -1;
+}
+...
+
+In the above code, we're asking the kernel to open the file ./a-file. If the file does not exist, create the file. 
+Open it read write, with the linux octal permissions 0644, or rw-r--r-.
+
+### write ###
+With the file open and the descriptor checked to be a valid value, we can use that descriptor in other functions. 
+For example, write.
+
+char *a_buf = "some data\n";
+write(fd, a_buf, strlen(a_buf));
+
+The above function uses the descriptor from before, and writes the buffer at a_buf to that location. 
+Doing this, we can check the file to see the contents
+
+$ cat ./a-file
+some data
+$
