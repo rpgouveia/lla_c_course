@@ -1,0 +1,46 @@
+### Multi-Module Programming ###
+It's important to design code in a way that makes sense before we write it. 
+And no, this does not mean that we sit at a whiteboard for weeks without writing a line of code, I'm not here for analysis paralysis. 
+However, it's important to at least envision our code and how it's organized before we start typing away.
+
+### Modules ###
+A module in programming refers to something that is wholly seperate, does not depend on coupled dependencies, and performs a function. 
+We can think of our database project as a set of modules that interfaces with the user. Maybe we have:
+
+the main module: interfaces via stdin and stdout
+the file module: interfaces with the main module via an exposed interface and the filesystem
+the parsing module: reads data from opened files and parses them for the user
+
+### Header Files ###
+Interfaces between the main module and the other modules are exposed in header files. 
+Header files reveal the declarations, but not necesarily the definitions, for functions that we use in a module. 
+Inside of a C file for a module, we will define the function, but the main module does not need to know about the internal functionality: 
+just the inputs and outputs.
+
+A sample header file could be:
+
+#ifndef FILE_H
+#define FILE_H
+
+int open_rw_file(char *path);
+
+#endif
+
+In this file, file.h, we expose the interface to the file module, without giving the definition of the function. 
+To access these functions, we use headers in main.c
+
+...
+#include "file.h"
+
+### Compilation ###
+To compile a program that has multiple C files that each represent a different module, we can use gcc in the following way.
+
+### Compile ###
+Compile each of your modules into an intermediate ELF file (Executable and Linkable Format).
+gcc -o file.o -I$(pwd)/include src/file.c -c
+gcc -o parse.o -I$(pwd)/include src/parse.c -c
+gcc -o pmain.o -I$(pwd)/include src/main.c -c
+
+### Link ###
+Finally, link all the object files together. 
+gcc *.o -o bin/main.out
