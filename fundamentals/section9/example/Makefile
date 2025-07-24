@@ -27,3 +27,7 @@ obj/%.o : src/%.c
 clean:
 	rm -f obj/*.o
 	rm -f bin/*
+
+# Simple example of usage:
+# To build the project, run: make
+# To clean the build, run: make clean
